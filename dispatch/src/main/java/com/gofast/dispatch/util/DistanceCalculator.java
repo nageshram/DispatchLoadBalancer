@@ -4,10 +4,14 @@ package com.gofast.dispatch.util;
 public class DistanceCalculator {
 
     public static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-        final int R = 6371; // Radius of the earth in km
+        final int R = 6371; // Radius of the earth in kilometers
 
+        
+        // make sure your converting your data to radians (because we are dealing with sphere )
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
+        
+        //haversine formula for finding distance between two points on the surface of (sphere)earth 
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
                 + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);

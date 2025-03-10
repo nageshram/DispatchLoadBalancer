@@ -11,10 +11,25 @@ public class Vehicle {
     @Id
     @Column(name="vehicleid")
     private String vehicleId;
-    private double capacity;
+	private double capacity;
     private double currentLatitude;
     private double currentLongitude;
     private String currentAddress;
+    
+    
+    public Vehicle() {
+		super();
+	}
+    
+	public Vehicle(String vehicleId, double capacity, double currentLatitude, double currentLongitude,
+			String currentAddress) {
+		super();
+		this.vehicleId = vehicleId;
+		this.capacity = capacity;
+		this.currentLatitude = currentLatitude;
+		this.currentLongitude = currentLongitude;
+		this.currentAddress = currentAddress;
+	}
 	public String getVehicleId() {
 		return vehicleId;
 	}

@@ -13,11 +13,28 @@ public class Order {
     @Column(name="orderid")
     private String orderId;
 	private double latitude;
-    private double longitude;
+   	private double longitude;
     private String address;
     @Column(name="package_weight")
     private double packageWeight;
     private String priority;
+   
+    public Order() {
+		//super();
+	}
+ 
+    public Order(String orderId, double latitude, double longitude, String address, double packageWeight,
+			String priority) {
+		super();
+		this.orderId = orderId;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.address = address;
+		this.packageWeight = packageWeight;
+		this.priority = priority;
+	}
+	
+    
     
     public String getOrderId() {
 		return orderId;
@@ -40,11 +57,7 @@ public class Order {
 	public String getAddress() {
 		return address;
 	}
-	@Override
-	public String toString() {
-		return "Order [orderId=" + orderId + ", latitude=" + latitude + ", longitude=" + longitude + ", address="
-				+ address + ", packageWeight=" + packageWeight + ", priority=" + priority + "]";
-	}
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -59,5 +72,11 @@ public class Order {
 	}
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+	
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", latitude=" + latitude + ", longitude=" + longitude + ", address="
+				+ address + ", packageWeight=" + packageWeight + ", priority=" + priority + "]";
 	}
 }

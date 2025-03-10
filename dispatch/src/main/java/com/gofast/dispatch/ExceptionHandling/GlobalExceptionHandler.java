@@ -9,7 +9,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+	//binds and handles specific exceptions in the system
     @ExceptionHandler(InvalidInputException.class)
     public ResponseEntity<?> handleInvalidInputException(InvalidInputException e) {
         return new ResponseEntity<>(Map.of("message", e.getMessage(), "status", "error"), HttpStatus.BAD_REQUEST);
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleUnassignableOrderException(UnassignableOrderException e) {
         return new ResponseEntity<>(Map.of("message", e.getMessage(), "status", "error"), HttpStatus.BAD_REQUEST);
     }
-
+    //handling any server side error 500....
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGenericException(Exception e) {
         return new ResponseEntity<>(Map.of("message", e.getMessage(),"status", "error"), HttpStatus.INTERNAL_SERVER_ERROR);

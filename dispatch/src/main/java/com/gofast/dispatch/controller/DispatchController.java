@@ -28,7 +28,13 @@ public class DispatchController {
 
     @Autowired
     private DispatchService dispatchService;
-
+    
+    /*since input is providing as a object, here we are wrapping data with another OrderRequest wrapper class
+    * This wrapper class can accept object that includes a list of JSON objects
+    * same method is followed for the vehicles Entity
+    * Dispatch plan generated using LinkedHasMap class so it can return the object as response (hence we don't require wrapper class for that)
+    */
+    
     @PostMapping("/orders")
     public ResponseEntity<?> inputOrders(@RequestBody OrdersRequest ordersReq) {
         List<Order> orders = ordersReq.getOrders();

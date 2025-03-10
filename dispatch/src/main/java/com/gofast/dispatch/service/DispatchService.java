@@ -22,7 +22,7 @@ public class DispatchService {
     @Autowired
     private VehicleService vehicleService;
 
-    // Helper class to track vehicle state during assignment
+    // This  class will track vehicle state during assignment eg. Capacity(imp attribute)
     private static class VehicleState {
         private final String vehicleId;
         private double remainingCapacity;
@@ -44,15 +44,17 @@ public class DispatchService {
         List<Order> orders = orderService.getAllOrders();
         List<Vehicle> vehicles = vehicleService.getAllVehicles();
 
-        // Validate input
+        // to Validate orders input
         if (orders.isEmpty()) {
             throw new InvalidInputException("No orders available for dispatch.");
         }
+        
+        //for handling error when no vehicles submitted 
         if (vehicles.isEmpty()) {
             throw new InvalidInputException("No vehicles available for dispatch.");
         }
 
-        // Sort orders by priority (HIGH first)
+        // Sorting orders by priority (HIGH first)
         orders.sort((o1, o2) -> o2.getPriority().compareTo(o1.getPriority()));
 
         // Initialize vehicle states
@@ -63,12 +65,12 @@ public class DispatchService {
 
         List<Order> unassignedOrders = new ArrayList<>();
 
-        // Main logic: Assign each order to the best vehicle
+        //  Assign each order to the best vehicle to optimize the load balance
         for (Order order : orders) {
             VehicleState bestVehicle = null;
             double minDistance = Double.MAX_VALUE;
 
-            // Find the closest vehicle with capacity
+            // here we are finding the closest vehicle with capacity
             for (VehicleState vs : vehicleStates) {
                 if (vs.remainingCapacity >= order.getPackageWeight()) {
                     double distance = DistanceCalculator.calculateDistance(
@@ -91,11 +93,13 @@ public class DispatchService {
                 bestVehicle.currentLon = order.getLongitude();
                 bestVehicle.assignedOrders.add(order);
             } else {
+            	//if the order did'nt get any vehicle that suits with the capacity and location then that order will be added to unassigned order   
                 unassignedOrders.add(order);
             }
         }
 
-        // Build response
+        // creating custom response in order to provide both dispatch plan as well as unassigned orders
+        // so that orders will get next priority on next dispatch plan (to handle unassigned orders)
         return createResponse(vehicleStates, unassignedOrders);
     }
 
@@ -107,17 +111,17 @@ public class DispatchService {
             Map<String, Object> vehiclePlan = new HashMap<>();
             vehiclePlan.put("vehicleId", vs.vehicleId);
 
-            // Calculate total load
+            // Calculating total load for dispatch plan
             double totalLoad = 0.0;
             for (Order order : vs.assignedOrders) {
                 totalLoad += order.getPackageWeight();
             }
             vehiclePlan.put("totalLoad", totalLoad);
 
-            // Format total distance
+            // total distance
             vehiclePlan.put("totalDistance", String.format("%.2f km", vs.totalDistance));
 
-            // Build assigned orders list
+            // creating assigned orders list
             List<Map<String, Object>> assignedOrders = new ArrayList<>();
             for (Order order : vs.assignedOrders) {
                 assignedOrders.add(createOrderMap(order));
@@ -127,13 +131,13 @@ public class DispatchService {
             dispatchPlan.add(vehiclePlan);
         }
 
-        // Build unassigned orders list
+        // creating unassigned orders list
         List<Map<String, Object>> unassignedOrderMaps = new ArrayList<>();
         for (Order order : unassignedOrders) {
             unassignedOrderMaps.add(createOrderMap(order));
         }
 
-        // Build final response
+        // Building final response
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("status", unassignedOrders.isEmpty() ? "success" : "partial_success");
         response.put("message", unassignedOrders.isEmpty()
