@@ -141,6 +141,15 @@ The application uses the **Haversine formula** to calculate the distance between
   ```
 
 ### **3. Retrieve Dispatch Plan**
+- Here i am not throwing an exception for unassigned orders instead of that i had included the unassigned orders along with dispatch plan so that , we can track unassigned orders and assign the vehicle in the next dispatch plan, observe the response at the end ( if 4 unassigned orders present then response will follow like this..)
+```json
+{ "status":"partial_success",
+ "message":"4 orders unassigned due to capacity constraints",
+ "dispatchPlan":[],
+"unassignedOrders":[]
+}
+```
+-- if no un assigned orders then response will look like this.
 - **Endpoint**: `GET /api/dispatch/plan`
 - **Response**:
   ```json
