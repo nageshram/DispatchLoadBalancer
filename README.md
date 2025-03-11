@@ -46,8 +46,8 @@ The application uses the **Haversine formula** to calculate the distance between
 ### **Steps to Run**
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo/dispatch-load-balancer.git
-   cd dispatch-load-balancer
+   git clone https://github.com/your-repo/DispatchLoadBalancer.git
+   cd DispatchLoadBalancer
    ```
 
 2. **Configure MySQL**:
