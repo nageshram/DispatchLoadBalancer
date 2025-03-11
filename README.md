@@ -141,12 +141,60 @@ The application uses the **Haversine formula** to calculate the distance between
   ```
 
 ### **3. Retrieve Dispatch Plan**
-- Here i am not throwing an exception for unassigned orders instead of that i had included the unassigned orders along with dispatch plan so that , we can track unassigned orders and assign the vehicle in the next dispatch plan, observe the response at the end ( if 4 unassigned orders present then response will follow like this..)
+- Here i am not throwing an exception for unassigned orders instead of that i had included the unassigned orders along with dispatch plan so that , we can track unassigned orders and assign the vehicle in the next dispatch plan, observe the response at the end ( if 2 unassigned order present then response will follow like this..)
 ```json
-{ "status":"partial_success",
- "message":"4 orders unassigned due to capacity constraints",
- "dispatchPlan":[],
-"unassignedOrders":[]
+{
+"status":"partial_success",
+ "message":"2 orders unassigned due to capacity constraints",
+ "dispatchPlan": [
+      {
+        "vehicleId": "VEH001",
+        "totalLoad": 30,
+        "totalDistance": "15.25 km",
+        "assignedOrders": [
+          {
+            "orderId": "ORD001",
+            "latitude": 12.9716,
+            "longitude": 77.5946,
+            "address": "MG Road, Bangalore, Karnataka, India",
+            "packageWeight": 10,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "vehicleId": "VEH002",
+        "totalLoad": 20,
+        "totalDistance": "10.50 km",
+        "assignedOrders": [
+          {
+            "orderId": "ORD002",
+            "latitude": 13.0827,
+            "longitude": 80.2707,
+            "address": "Anna Salai, Chennai, Tamil Nadu, India",
+            "packageWeight": 20,
+            "priority": "MEDIUM"
+          }
+    ,
+"unassignedOrders":[
+         {
+            "orderId": "ORD003",
+            "latitude": 33.0827,
+            "longitude": 60.2707,
+            "address": "Street example, Banglore, Karnataka, India",
+            "packageWeight": 20,
+            "priority": "MEDIUM"
+          },
+         {
+            "orderId": "ORD004",
+            "latitude": 15.0827,
+            "longitude": 90.2707,
+            "address": "Some Home, Chennai, Tamil Nadu, India",
+            "packageWeight": 20,
+            "priority": "MEDIUM"
+          }
+
+]
 }
 ```
 -- if no un assigned orders then response will look like this.
