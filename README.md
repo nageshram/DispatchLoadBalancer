@@ -335,6 +335,6 @@ The application uses the **Haversine formula** to calculate the distance between
 
 ## **Contact**
 For any questions or issues, please contact:
-- **Your Name**: [Nagesha](mailto:nagesha2r@gmail.com)
+- **Nagesha**: [nagesha2r@gmail.com](mailto:nagesha2r@gmail.com)
 
 ---
