@@ -46,7 +46,7 @@ The application uses the **Haversine formula** to calculate the distance between
 ### **Steps to Run**
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo/DispatchLoadBalancer.git
+   git clone https://github.com/nageshram/DispatchLoadBalancer.git
    cd DispatchLoadBalancer
    ```
 
