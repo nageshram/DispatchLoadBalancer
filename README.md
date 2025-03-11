@@ -175,7 +175,7 @@ The application uses the **Haversine formula** to calculate the distance between
             "packageWeight": 20,
             "priority": "MEDIUM"
           }
-    ,
+    ],
 "unassignedOrders":[
          {
             "orderId": "ORD003",
