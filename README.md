@@ -1,6 +1,7 @@
 # Dispatch Load Balancer - Spring Boot Backend Application
 
 This project is a Spring Boot Backend application designed to optimize the allocation of delivery orders to a fleet of vehicles based on their locations. The application minimizes the total travel distance while considering vehicle capacities and order priorities.
+
 Assume we are buliding this application for **gofast** organization (random company name)
 ---
 
@@ -239,6 +240,22 @@ The application uses the **Haversine formula** to calculate the distance between
     "unassignedOrders": []
   }
   ```
+
+----
+# **Dispatch Plan implementation**
+- To assign orders to vehicles i have used a simple algorithm that for each order it will search for best vehicle that has near to the delivery address and having capacity to hold the orders,
+- once we got the best vehicle we will assign the order to the vehicle( if it meets constraints).
+
+- This will optimally distributes the orders to vehicles and with minimum distance.
+- we have another algorithm that, for each vehicle it will find the orders and assign them but this will leads unequal distribution orders , only one vehicle will get all high priority orders and other vehicles may starve and can get low priority so i have not used this approach.
+
+- for implementation kindly visit
+  **com.gofast.dispatch.service.DispatchService.java** in the repo.
+
+----
+
+
+
 
 ---
  **Test Cases**
