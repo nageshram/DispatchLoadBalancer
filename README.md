@@ -2,7 +2,7 @@
 
 This project is a Spring Boot Backend application designed to optimize the allocation of delivery orders to a fleet of vehicles based on their locations. The application minimizes the total travel distance while considering vehicle capacities and order priorities.
 
-Assume we are buliding this application for **gofast** organization (random company name)
+- Assume we are buliding this application for **gofast** organization (random company name)
 ---
 
 ## **Technologies Used**
